@@ -1,0 +1,96 @@
+request endpoint:  /plans?start=50&count=10
+data: {start: 50, count: 10}   # optional arguments, this asks for only the  50-59th entries
+response: {[
+{name: "Account Managers", id: <id>, url="http://asdf.png"}, 
+{name: "Sales Reps", id: <id>, url="http://asdfg.png"}, 
+{name: "Vertical Leads", id: <id>, url="http://asdfgh.png"}, 
+{name: "Founders", id: <id>, url="http://asdfghj.png"},
+]}
+
+Users:
+request endpoint:  /user
+data: {start: 50, count: 10} # optional arguments, this asks for only the  50-59th rows
+response: {[
+  # USERS TABLE CONTENTS
+]}
+
+Account Settings:
+request endpoint:  /basic-information
+request type: PUT or POST
+data: {
+Company Name: "Amazingly"
+Lead Contact: "John Johnson"
+Contact Phone: "415-789-3383"
+Address: "1 incredible drive\nSan Francisco, CA 94010"
+} 
+
+request endpoint:  /billing
+request type: PUT or POST
+data: {
+???? Needs external integration with Stripe
+} 
+
+
+
+Plan Data:
+request endpoint: /plan-data/data-keys
+data: {}
+response: { 
+      sourceKeys: [{'name':'some calcobj'}, {'name':'another calc'}]
+      destinationKeys: [{'name': 'foo'}, {'name': 'bar'}, {'name': 'baz'}]
+}
+
+request endpoint: /plan-data/data-objects
+data: {}
+response: { 
+      dataObjects: [{'name': 'users', id: '2234sdfsa'},
+     {'name': 'deals', id: 'asdfasf323'},
+     {'name': 'splits', id: 'aswer234'},
+    {'name': 'commissions', id: 'zxcv123'}]
+}
+
+request endpoint: /plan-data/associations
+request type: GET
+response: {[
+  ['2234sdfsa', 'zxcv123'],
+  ['asdfasf323', 'aswer234']
+]}
+
+request endpoint: /plan-data/associations
+request type: POST or PUT
+data: {[
+  ['2234sdfsa', 'zxcv123'],
+  ['asdfasf323', 'aswer234']
+]}
+response: {}
+
+Line Items:
+request endpoint: /line-items
+response: {[
+  {'id' : 'asfdasdf1234',
+'name': 'Commission at 5%',
+  'applies to plans': ['plan1', 'plan2'],
+  'formula': '=SUM(deals.revenue) * 0.05',
+  'associate with user on': 'somekey'},
+  {...}, {...}, ...
+  
+]}
+
+Setup Calcs:
+request endpoint: /users
+data: {  
+org_id: "foo", 
+user_id: asfd1234,
+name: "John Sales",
+employee_id: "sdf234", 
+hire_date: "1995-01-23T08:00:00.000Z",
+email: "foo@adsf.com"
+}
+
+request endpoint: /calculation_objects
+data: {org_id: "foo"}
+response: {[
+  {name: "Deals", id: <id>},
+  {name: "Splits", id: <id>},
+  {name: "Adjustments", id: <id>}
+]}
